@@ -318,4 +318,26 @@ function Map()
 		}
         e.preventDefault();
 	});
+
+	infoLayer.addEventListener('touchstart', function(e)
+	{
+	  var e = e.targetTouches[0]
+		mousedown_x = e.clientX;
+		mousedown_y = e.clientY;
+	});
+	infoLayer.addEventListener('touchmove', function(e)
+	{
+    e.preventDefault();
+	  var e = e.targetTouches[0]
+		if (e.buttons != 0 && mousedown_x !== e.clientX && mousedown_y !== e.clientY) {
+			// マウスドラッグによるスクロール
+			data.map_x += mousedown_x - e.clientX;
+			data.map_y += mousedown_y - e.clientY;
+			limit_map_center();
+			mousedown_x = e.clientX;
+			mousedown_y = e.clientY;
+			update_map();
+			update_info();
+		}
+	});
 }
