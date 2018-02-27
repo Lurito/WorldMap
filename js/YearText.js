@@ -60,7 +60,8 @@ function YearText()
 				var e = er[j];
 				if (year >= e[0]) {
 					if (e[1] !== null) {
-						ret += e[1] + (year-e[0]+1) + '年 / ';
+					  var yearname = (era == era_cn && year > 743 && year < 758) && '載' || '年';
+						ret += e[1] + (year-e[0]+1) + yearname + ' / ';
 					}
 					break;
 				}
